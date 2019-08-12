@@ -1,0 +1,520 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>America Homicide Reports</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="Geographical.css" title="style" />
+  <script type="text/javascript"
+	        src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <!-- Resources -->
+	
+	<script src="https://www.amcharts.com/lib/4/core.js"></script>
+	<script src="https://www.amcharts.com/lib/4/maps.js"></script>
+	<script src="https://www.amcharts.com/lib/4/geodata/usaLow.js"></script>
+	<script src="https://www.amcharts.com/lib/4/themes/material.js"></script>
+	<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+	<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+
+
+
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <h1><a href="index.html">U.S.A. Homicide Report<span class="logo_color"> </br></span></a></h1>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <li ><a href="index.html">Overview</a></li>
+          <li class="selected"><a href="Geographical.html">Geographical</a></li>
+          <li><a href="Human.html">Human</a></li>
+          <li><a href="Weapon.html">Weapon</a></li>
+          <li><a href="Relationship.html">Relationship</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+      <div class="sidebar">
+        <h3>Designer</h3>
+        <h4>HungChun Lin</h4>
+		<h5>Data Science Program
+		</br>Columbian College of Arts and Sciences</br>George Washington University</h5>
+        <h5><a href="hungchun_lin@gwu.edu">hungchun_lin@gwu.edu</a></h5>
+        <p>This website is the project for visualizing the complex data<br /></p>
+        <h5>Instructor: Dr. Nima Zahadat</h5>
+		
+        <h3>Resourse Links</h3>
+        <ul>
+		  <li><a href="https://www.kaggle.com/">Kaggle Datasets</a></li>
+		  <li><a href="https://www.worldbank.org/">World Bank</a></li>
+		  <li><a href="https://www.amcharts.com/about/">amCharts</a></li>
+		  <li><a href="https://www.freeformatter.com/csv-to-json-converter.html#ad-output">FreeFormatter</a></li>
+          <li><a href="https://developers.google.com/chart/interactive/docs/gallery">Google Gallery</a></li>
+          <li><a href="https://www.data.gov/">Government Datasets</a></li>
+          <li><a href="https://www.plot.ly/">Plotly</a></li>
+        </ul>
+      </div>
+    <div id="content">
+        <h1>Geographical Factor</h1>
+        <p>This part is for looking to the distribution of the homicides in the USA. From the geomap we coud easily find that which state is the most dangerous state.
+		</p>
+		</br>
+	
+	<br /><br /><br />
+	
+	<!--D3-->
+	<div class="graph">
+	<div class="image_description">The heat map of the homicide count in the USA</div>
+	<div id="map"
+			style="width:650px; height:450px;"></div>
+			
+	<p>From this map, obviously, <span class='highlight_color_red'>Florida</span> is the state which has the <span class='highlight_color_pink'>most</span> homicides from 1980 to 2014.</p>
+			
+	<br /><br /><br />
+	
+	<div class="image_description">Top 5 states</div>
+	<div id="top5"
+			style="width:700px; height:450px;"></div>
+		
+
+
+	<br /><br /><br />
+			
+    </div><!--D3-->
+	</div><!--content-->
+    </div><!--site_content-->
+    <h6>*Icons made by <a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" 
+	title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"  
+	title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></h6>
+
+    <div id="content_footer"></div>
+    <div id="footer">
+      Copyright &copy; <script>var d = new Date(); document.write(d.getFullYear());</script>
+    </div>
+  </div><!--main-->
+    
+</body>
+</html>
+
+<!-- Chart code -->
+<script>
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_material);
+// Themes end
+
+ // Create map instance
+var chart = am4core.create("map", am4maps.MapChart);
+
+// Set map definition
+chart.geodata = am4geodata_usaLow;
+
+// Set projection
+chart.projection = new am4maps.projections.AlbersUsa();
+
+// Create map polygon series
+var polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
+
+//Set min/max fill color for each area
+polygonSeries.heatRules.push({
+  property: "fill",
+  target: polygonSeries.mapPolygons.template,
+  min: chart.colors.getIndex(1).brighten(3),
+  max: chart.colors.getIndex(1).brighten(-0.6)
+});
+
+// Make map load polygon data (state shapes and names) from GeoJSON
+polygonSeries.useGeodata = true;
+
+// Set heatmap values for each state
+polygonSeries.data = [
+   {
+      "id": "US-AL",
+      "value": 38149
+   },
+   {
+      "id": "US-AK",
+      "value": 2704
+   },
+   {
+      "id": "US-AZ",
+      "value": 61337
+   },
+   {
+      "id": "US-AR",
+      "value": 12898
+   },
+   {
+      "id": "US-CA",
+      "value": 1011666
+   },
+   {
+      "id": "US-CO",
+      "value": 15993
+   },
+   {
+      "id": "US-CT",
+      "value": 8727
+   },
+   {
+      "id": "US-DE",
+      "value": 1592
+   },
+   {
+      "id": "US-DC",
+      "value": 133621
+   },
+   {
+      "id": "US-FL",
+      "value": 8100400
+   },
+   {
+      "id": "US-GA",
+      "value": 72159
+   },
+   {
+      "id": "US-HI",
+      "value": 2655
+   },
+   {
+      "id": "US-ID",
+      "value": 1209
+   },
+   {
+      "id": "US-IL",
+      "value": 675189
+   },
+   {
+      "id": "US-IN",
+      "value": 39324
+   },
+   {
+      "id": "US-IA",
+      "value": 2111
+   },
+   {
+      "id": "US-KS",
+      "value": 5348
+   },
+   {
+      "id": "US-KY",
+      "value": 15654
+   },
+   {
+      "id": "US-LA",
+      "value": 116804
+   },
+   {
+      "id": "US-ME",
+      "value": 907
+   },
+   {
+      "id": "US-MD",
+      "value": 140968
+   },
+   {
+      "id": "US-MA",
+      "value": 15506
+   },
+   {
+      "id": "US-MI",
+      "value": 404028
+   },
+   {
+      "id": "US-MN",
+      "value": 8196
+   },
+   {
+      "id": "US-MS",
+      "value": 12248
+   },
+   {
+      "id": "US-MO",
+      "value": 83967
+   },
+   {
+      "id": "US-MT",
+      "value": 640
+   },
+   {
+      "id": "US-NE",
+      "value": 2663
+   },
+   {
+      "id": "US-NV",
+      "value": 26179
+   },
+   {
+      "id": "US-NH",
+      "value": 763
+   },
+   {
+      "id": "US-NJ",
+      "value": 35128
+   },
+   {
+      "id": "US-NM",
+      "value": 8956
+   },
+   {
+      "id": "US-NY",
+      "value": 2580966
+   },
+   {
+      "id": "US-NC",
+      "value": 34480
+   },
+   {
+      "id": "US-ND",
+      "value": 314
+   },
+   {
+      "id": "US-OH",
+      "value": 68784
+   },
+   {
+      "id": "US-OK",
+      "value": 36867
+   },
+   {
+      "id": "US-OR",
+      "value": 7395
+   },
+   {
+      "id": "US-PA",
+      "value": 232233
+   },
+   {
+      "id": "US-RI",
+      "value": 2080
+   },
+   {
+      "id": "US-SC",
+      "value": 15400
+   },
+   {
+      "id": "US-SD",
+      "value": 556
+   },
+   {
+      "id": "US-TN",
+      "value": 73896
+   },
+   {
+      "id": "US-TX",
+      "value": 473974
+   },
+   {
+      "id": "US-UT",
+      "value": 2569
+   },
+   {
+      "id": "US-VT",
+      "value": 503
+   },
+   {
+      "id": "US-VA",
+      "value": 33447
+   },
+   {
+      "id": "US-WA",
+      "value": 12707
+   },
+   {
+      "id": "US-WV",
+      "value": 4437
+   },
+   {
+      "id": "US-WI",
+      "value": 24946
+   },
+   {
+      "id": "US-WY",
+      "value": 720
+   }
+];
+
+
+// Set up heat legend
+let heatLegend = chart.createChild(am4maps.HeatLegend);
+heatLegend.series = polygonSeries;
+heatLegend.align = "right";
+heatLegend.valign = "bottom";
+heatLegend.width = am4core.percent(20);
+heatLegend.marginRight = am4core.percent(4);
+heatLegend.minValue = 300;
+heatLegend.maxValue = 450000;
+
+// Set up custom heat map legend labels using axis ranges
+var minRange = heatLegend.valueAxis.axisRanges.create();
+minRange.value = heatLegend.minValue;
+minRange.label.text = "300";
+var maxRange = heatLegend.valueAxis.axisRanges.create();
+maxRange.value = heatLegend.maxValue;
+maxRange.label.text = "450,000";
+
+
+// Blank out internal heat legend value axis labels
+heatLegend.valueAxis.renderer.labels.template.adapter.add("text", function(labelText) {
+  return "";
+});
+
+// Configure series tooltip
+var polygonTemplate = polygonSeries.mapPolygons.template;
+polygonTemplate.tooltipText = "{name}: {value}";
+polygonTemplate.nonScalingStroke = true;
+polygonTemplate.strokeWidth = 0.5;
+
+// Create hover state and set alternative fill color
+var hs = polygonTemplate.states.create("hover");
+hs.properties.fill = am4core.color("#3c5bdc");
+
+}); // end am4core.ready()
+</script>
+
+<script>
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+/**
+ * Chart design taken from Samsung health app
+ */
+
+var chart = am4core.create("top5", am4charts.XYChart);
+chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+chart.paddingBottom = 30;
+
+chart.data = [
+   {
+      "State": "Florida",
+      "Incident": 8100400,
+	  "flags": "flags/Flag_of_Florida.jpg"
+   },
+   {
+      "State": "New York",
+      "Incident": 2580966,
+	  "flags": "flags/Flag_of_New_York.jpg"
+   },
+   {
+      "State": "California",
+      "Incident": 1011666,
+	  "flags": "flags/Flag_of_California.jpg"
+   },
+   {
+      "State": "Illinois",
+      "Incident": 675189,
+	  "flags": "flags/Flag_of_Illinois.jpg"
+   },
+   {
+      "State": "Texas",
+      "Incident": 473974,
+	  "flags": "flags/Flag_of_Texas.jpg"
+   },
+   
+];
+
+var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+categoryAxis.dataFields.category = "State";
+categoryAxis.renderer.grid.template.strokeOpacity = 0;
+categoryAxis.renderer.minGridDistance = 10;
+categoryAxis.renderer.labels.template.dy = 35;
+categoryAxis.renderer.tooltip.dy = 35;
+
+var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+valueAxis.renderer.inside = true;
+valueAxis.renderer.labels.template.fillOpacity = 0.6;
+valueAxis.renderer.grid.template.strokeOpacity = 0;
+valueAxis.min = 0;
+valueAxis.cursorTooltipEnabled = false;
+valueAxis.renderer.baseGrid.strokeOpacity = 0;
+
+
+var series = chart.series.push(new am4charts.ColumnSeries);
+series.dataFields.valueY = "Incident";
+series.dataFields.categoryX = "State";
+series.tooltipText = "{valueY.value}";
+series.tooltip.pointerOrientation = "vertical";
+series.tooltip.dy = - 6;
+series.columnsContainer.zIndex = 100;
+
+var columnTemplate = series.columns.template;
+columnTemplate.width = am4core.percent(50);
+columnTemplate.maxWidth = 50;
+columnTemplate.column.cornerRadius(60, 60, 10, 10);
+columnTemplate.strokeOpacity = 0;
+
+series.heatRules.push({ target: columnTemplate, property: "fill", dataField: "valueY", min: am4core.color("#EB79A8"), max: am4core.color("#DA0000") });
+series.mainContainer.mask = undefined;
+
+var cursor = new am4charts.XYCursor();
+chart.cursor = cursor;
+cursor.lineX.disabled = true;
+cursor.lineY.disabled = true;
+cursor.behavior = "none";
+
+var bullet = columnTemplate.createChild(am4charts.CircleBullet);
+bullet.circle.radius = 30;
+bullet.valign = "bottom";
+bullet.align = "center";
+bullet.isMeasured = true;
+bullet.mouseEnabled = false;
+bullet.verticalCenter = "bottom";
+bullet.interactionsEnabled = false;
+
+var hoverState = bullet.states.create("hover");
+var outlineCircle = bullet.createChild(am4core.Circle);
+outlineCircle.adapter.add("radius", function (radius, target) {
+    var circleBullet = target.parent;
+    return circleBullet.circle.pixelRadius + 10;
+})
+
+var image = bullet.createChild(am4core.Image);
+image.width = 60;
+image.height = 60;
+image.horizontalCenter = "middle";
+image.verticalCenter = "middle";
+image.propertyFields.href = "flags";
+
+image.adapter.add("mask", function (mask, target) {
+    var circleBullet = target.parent;
+    return circleBullet.circle;
+})
+
+var previousBullet;
+chart.cursor.events.on("cursorpositionchanged", function (event) {
+    var dataItem = series.tooltipDataItem;
+
+    if (dataItem.column) {
+        var bullet = dataItem.column.children.getIndex(1);
+
+        if (previousBullet && previousBullet != bullet) {
+            previousBullet.isHover = false;
+        }
+
+        if (previousBullet != bullet) {
+
+            var hs = bullet.states.getKey("hover");
+            hs.properties.dy = -bullet.parent.pixelHeight + 30;
+            bullet.isHover = true;
+
+            previousBullet = bullet;
+        }
+    }
+})
+
+}); // end am4core.ready()
+</script>

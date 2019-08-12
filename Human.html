@@ -1,0 +1,858 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>America Homicide Reports</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="Human.css" title="style" />
+  <script type="text/javascript"
+	        src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <!-- Resources -->
+	<script src="https://www.amcharts.com/lib/4/core.js"></script>
+	<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+	<script src="https://www.amcharts.com/lib/4/themes/kelly.js"></script>
+	<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+	<script src="https://www.amcharts.com/lib/4/themes/material.js"></script>
+	
+
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <h1><a href="index.html">U.S.A. Homicide Report<span class="logo_color"> </br></span></a></h1>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <li "><a href="index.html">Overview</a></li>
+          <li><a href="Geographical.html">Geographical</a></li>
+          <li class="selected"><a href="Human.html">Human</a></li>
+          <li><a href="Weapon.html">Weapon</a></li>
+          <li><a href="Relationship.html">Relationship</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+      <div class="sidebar">
+        <h3>Designer</h3>
+        <h4>HungChun Lin</h4>
+		<h5>Data Science Program
+		</br>Columbian College of Arts and Sciences</br>George Washington University</h5>
+        <h5><a href="hungchun_lin@gwu.edu">hungchun_lin@gwu.edu</a></h5>
+        <p>This website is the project for visualizing the complex data<br /></p>
+        <h5>Instructor: Dr. Nima Zahadat</h5>
+		
+        <h3>Resourse Links</h3>
+        <ul>
+		  <li><a href="https://www.kaggle.com/">Kaggle Datasets</a></li>
+		  <li><a href="https://www.worldbank.org/">World Bank</a></li>
+		  <li><a href="https://www.amcharts.com/about/">amCharts</a></li>
+		  <li><a href="https://www.freeformatter.com/csv-to-json-converter.html#ad-output">FreeFormatter</a></li>
+          <li><a href="https://developers.google.com/chart/interactive/docs/gallery">Google Gallery</a></li>
+          <li><a href="https://www.data.gov/">Government Datasets</a></li>
+          <li><a href="https://www.plot.ly/">Plotly</a></li>
+        </ul>
+      </div>
+    <div id="content">
+        <h1>Human Factor</h1>
+        <p>In this page, the human factors of the perpetrators and the victims will be analyzed. 
+		From the result, we will figure out what kind of factors of human would have the higher potential to become a perpetrator.	</p>
+		</br>
+	
+	<br /><br /><br />
+	
+	<!--D3-->
+	<div class="graph">
+	<div class="image_description">The age distribution of the killer and victim</div>
+	<div id="age"
+			style="width:650px; height:450px;"></div>
+			
+	<p>We can see the peak of the <span class="highlight_color_red"> killer</span> is <span class="highlight_color_pink">20</span> years old, and for the <span class="highlight_color_red">victim</span>, the peak is at <span class="highlight_color_pink">25</span> years old. Furthermore, there is a peack at 1 years old for victim, this may 
+	cause from domestic violence. </p>	
+	
+	<br /><br /><br />
+	
+	<div class="graph">
+	<div class="image_description">The race distribution of the killer </div>
+	<div id="killer_race"
+			style="width:650px; height:450px;"></div>
+
+	<p>From this pie chart, it shows that the <span class="highlight_color_red"> most</span> killers are <span class="highlight_color_pink">black </span> and the <span class="highlight_color_red">second</span> are <span class="highlight_color_pink">white</span>.</p>	
+	<p>Furthermore, for the high Unknown part, I think it might because some perpetrators were not been caught yet. </p>
+	
+	<br /><br /><br />
+	
+	<div class="graph">
+	<div class="image_description">The race distribution of the victim</div>
+	<div id="victim_race"
+			style="width:650px; height:450px;"></div>
+	<p>From this pie chart, it shows that the <span class="highlight_color_red"> most</span> victim are <span class="highlight_color_pink">black </span>, it even takes more than <span class="highlight_color_red">50% </span>.</p>	
+
+
+	<br /><br /><br /><br /><br /><br />
+	
+			
+    </div><!--D3-->
+	</div><!--content-->
+    </div><!--site_content-->
+    <h6>*Icons made by <a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" 
+	title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"  
+	title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></h6>
+
+    <div id="content_footer"></div>
+    <div id="footer">
+      Copyright &copy; <script>var d = new Date(); document.write(d.getFullYear());</script>
+    </div>
+  </div><!--main-->
+    
+</body>
+</html>
+
+<script>
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+// Create chart instance
+var chart = am4core.create("age", am4charts.XYChart);
+
+// Add data
+chart.data = [
+   {
+      "Age": 1,
+      "Killer count": 5037,
+      "Victim count": 251349
+   },
+   {
+      "Age": 2,
+      "Killer count": 13,
+      "Victim count": 80968
+   },
+   {
+      "Age": 3,
+      "Killer count": 801,
+      "Victim count": 47671
+   },
+   {
+      "Age": 4,
+      "Killer count": 213,
+      "Victim count": 28136
+   },
+   {
+      "Age": 5,
+      "Killer count": 2144,
+      "Victim count": 22506
+   },
+   {
+      "Age": 6,
+      "Killer count": 1330,
+      "Victim count": 19991
+   },
+   {
+      "Age": 7,
+      "Killer count": 2122,
+      "Victim count": 18068
+   },
+   {
+      "Age": 8,
+      "Killer count": 512,
+      "Victim count": 17867
+   },
+   {
+      "Age": 9,
+      "Killer count": 460,
+      "Victim count": 18108
+   },
+   {
+      "Age": 10,
+      "Killer count": 2290,
+      "Victim count": 16290
+   },
+   {
+      "Age": 11,
+      "Killer count": 4852,
+      "Victim count": 17890
+   },
+   {
+      "Age": 12,
+      "Killer count": 4947,
+      "Victim count": 20549
+   },
+   {
+      "Age": 13,
+      "Killer count": 15342,
+      "Victim count": 37958
+   },
+   {
+      "Age": 14,
+      "Killer count": 42548,
+      "Victim count": 52849
+   },
+   {
+      "Age": 15,
+      "Killer count": 92100,
+      "Victim count": 129877
+   },
+   {
+      "Age": 16,
+      "Killer count": 164705,
+      "Victim count": 216731
+   },
+   {
+      "Age": 17,
+      "Killer count": 269411,
+      "Victim count": 335446
+   },
+   {
+      "Age": 18,
+      "Killer count": 383320,
+      "Victim count": 431559
+   },
+   {
+      "Age": 19,
+      "Killer count": 392537,
+      "Victim count": 486502
+   },
+   {
+      "Age": 20,
+      "Killer count": 473363,
+      "Victim count": 551479
+   },
+   {
+      "Age": 21,
+      "Killer count": 387687,
+      "Victim count": 542372
+   },
+   {
+      "Age": 22,
+      "Killer count": 361840,
+      "Victim count": 531231
+   },
+   {
+      "Age": 23,
+      "Killer count": 344546,
+      "Victim count": 518033
+   },
+   {
+      "Age": 24,
+      "Killer count": 327427,
+      "Victim count": 517205
+   },
+   {
+      "Age": 25,
+      "Killer count": 397976,
+      "Victim count": 570500
+   },
+   {
+      "Age": 26,
+      "Killer count": 289140,
+      "Victim count": 487068
+   },
+   {
+      "Age": 27,
+      "Killer count": 259996,
+      "Victim count": 437240
+   },
+   {
+      "Age": 28,
+      "Killer count": 260640,
+      "Victim count": 392831
+   },
+   {
+      "Age": 29,
+      "Killer count": 211566,
+      "Victim count": 404581
+   },
+   {
+      "Age": 30,
+      "Killer count": 247510,
+      "Victim count": 403090
+   },
+   {
+      "Age": 31,
+      "Killer count": 216827,
+      "Victim count": 349292
+   },
+   {
+      "Age": 32,
+      "Killer count": 188990,
+      "Victim count": 332355
+   },
+   {
+      "Age": 33,
+      "Killer count": 176810,
+      "Victim count": 315943
+   },
+   {
+      "Age": 34,
+      "Killer count": 160359,
+      "Victim count": 307947
+   },
+   {
+      "Age": 35,
+      "Killer count": 177700,
+      "Victim count": 331053
+   },
+   {
+      "Age": 36,
+      "Killer count": 167919,
+      "Victim count": 268874
+   },
+   {
+      "Age": 37,
+      "Killer count": 158449,
+      "Victim count": 261244
+   },
+   {
+      "Age": 38,
+      "Killer count": 136704,
+      "Victim count": 237086
+   },
+   {
+      "Age": 39,
+      "Killer count": 143497,
+      "Victim count": 259939
+   },
+   {
+      "Age": 40,
+      "Killer count": 140351,
+      "Victim count": 245665
+   },
+   {
+      "Age": 41,
+      "Killer count": 130238,
+      "Victim count": 237564
+   },
+   {
+      "Age": 42,
+      "Killer count": 119240,
+      "Victim count": 222204
+   },
+   {
+      "Age": 43,
+      "Killer count": 92850,
+      "Victim count": 194294
+   },
+   {
+      "Age": 44,
+      "Killer count": 111046,
+      "Victim count": 195167
+   },
+   {
+      "Age": 45,
+      "Killer count": 91325,
+      "Victim count": 193065
+   },
+   {
+      "Age": 46,
+      "Killer count": 89856,
+      "Victim count": 179491
+   },
+   {
+      "Age": 47,
+      "Killer count": 81202,
+      "Victim count": 169888
+   },
+   {
+      "Age": 48,
+      "Killer count": 74546,
+      "Victim count": 161677
+   },
+   {
+      "Age": 49,
+      "Killer count": 78860,
+      "Victim count": 163634
+   },
+   {
+      "Age": 50,
+      "Killer count": 72660,
+      "Victim count": 173418
+   },
+   {
+      "Age": 51,
+      "Killer count": 65301,
+      "Victim count": 159180
+   },
+   {
+      "Age": 52,
+      "Killer count": 57136,
+      "Victim count": 132805
+   },
+   {
+      "Age": 53,
+      "Killer count": 52132,
+      "Victim count": 133526
+   },
+   {
+      "Age": 54,
+      "Killer count": 50513,
+      "Victim count": 119474
+   },
+   {
+      "Age": 55,
+      "Killer count": 47767,
+      "Victim count": 98294
+   },
+   {
+      "Age": 56,
+      "Killer count": 34871,
+      "Victim count": 102057
+   },
+   {
+      "Age": 57,
+      "Killer count": 33483,
+      "Victim count": 85127
+   },
+   {
+      "Age": 58,
+      "Killer count": 31482,
+      "Victim count": 78787
+   },
+   {
+      "Age": 59,
+      "Killer count": 30479,
+      "Victim count": 72901
+   },
+   {
+      "Age": 60,
+      "Killer count": 30704,
+      "Victim count": 70795
+   },
+   {
+      "Age": 61,
+      "Killer count": 23676,
+      "Victim count": 69127
+   },
+   {
+      "Age": 62,
+      "Killer count": 25706,
+      "Victim count": 73243
+   },
+   {
+      "Age": 63,
+      "Killer count": 21428,
+      "Victim count": 57236
+   },
+   {
+      "Age": 64,
+      "Killer count": 17320,
+      "Victim count": 55459
+   },
+   {
+      "Age": 65,
+      "Killer count": 16541,
+      "Victim count": 58102
+   },
+   {
+      "Age": 66,
+      "Killer count": 18881,
+      "Victim count": 45699
+   },
+   {
+      "Age": 67,
+      "Killer count": 14214,
+      "Victim count": 44590
+   },
+   {
+      "Age": 68,
+      "Killer count": 15676,
+      "Victim count": 35511
+   },
+   {
+      "Age": 69,
+      "Killer count": 16568,
+      "Victim count": 36241
+   },
+   {
+      "Age": 70,
+      "Killer count": 10900,
+      "Victim count": 44424
+   },
+   {
+      "Age": 71,
+      "Killer count": 13171,
+      "Victim count": 34421
+   },
+   {
+      "Age": 72,
+      "Killer count": 13955,
+      "Victim count": 32785
+   },
+   {
+      "Age": 73,
+      "Killer count": 11104,
+      "Victim count": 26234
+   },
+   {
+      "Age": 74,
+      "Killer count": 6388,
+      "Victim count": 26724
+   },
+   {
+      "Age": 75,
+      "Killer count": 9489,
+      "Victim count": 27341
+   },
+   {
+      "Age": 76,
+      "Killer count": 7169,
+      "Victim count": 31511
+   },
+   {
+      "Age": 77,
+      "Killer count": 7225,
+      "Victim count": 27159
+   },
+   {
+      "Age": 78,
+      "Killer count": 11409,
+      "Victim count": 27828
+   },
+   {
+      "Age": 79,
+      "Killer count": 3433,
+      "Victim count": 22261
+   },
+   {
+      "Age": 80,
+      "Killer count": 9080,
+      "Victim count": 25399
+   },
+   {
+      "Age": 81,
+      "Killer count": 4001,
+      "Victim count": 24625
+   },
+   {
+      "Age": 82,
+      "Killer count": 8994,
+      "Victim count": 19923
+   },
+   {
+      "Age": 83,
+      "Killer count": 2350,
+      "Victim count": 20470
+   },
+   {
+      "Age": 84,
+      "Killer count": 6612,
+      "Victim count": 12727
+   },
+   {
+      "Age": 85,
+      "Killer count": 3431,
+      "Victim count": 16060
+   },
+   {
+      "Age": 86,
+      "Killer count": 2807,
+      "Victim count": 10609
+   },
+   {
+      "Age": 87,
+      "Killer count": 4905,
+      "Victim count": 13251
+   },
+   {
+      "Age": 88,
+      "Killer count": 3758,
+      "Victim count": 9397
+   },
+   {
+      "Age": 89,
+      "Killer count": 909,
+      "Victim count": 3540
+   },
+   {
+      "Age": 90,
+      "Killer count": 414,
+      "Victim count": 5303
+   },
+   {
+      "Age": 91,
+      "Killer count": 1195,
+      "Victim count": 6625
+   },
+   {
+      "Age": 92,
+      "Killer count": 1449,
+      "Victim count": 4000
+   },
+   {
+      "Age": 93,
+      "Killer count": 683,
+      "Victim count": 4381
+   },
+   {
+      "Age": 94,
+      "Killer count": 22,
+      "Victim count": 2304
+   },
+   {
+      "Age": 95,
+      "Killer count": 84,
+      "Victim count": 1667
+   },
+   {
+      "Age": 96,
+      "Killer count": 854,
+      "Victim count": 842
+   },
+   {
+      "Age": 97,
+      "Killer count": 5,
+      "Victim count": 271
+   },
+   {
+      "Age": 98,
+      "Killer count": 125,
+      "Victim count": 210
+   },
+   {
+      "Age": 99,
+      "Killer count": 9255,
+      "Victim count": 105657
+   }
+];
+
+// Create axes
+var xAxis = chart.xAxes.push(new am4charts.ValueAxis());
+xAxis.renderer.minGridDistance = 40;
+
+// Create value axis
+var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+// Create series
+var series1 = chart.series.push(new am4charts.LineSeries());
+series1.dataFields.valueX = "Age";
+series1.dataFields.valueY = "Killer count";
+series1.dataFields.value = "Killer count";
+series1.strokeWidth = 2;
+series1.name = 'Killer Age';
+
+var bullet1 = series1.bullets.push(new am4charts.CircleBullet());
+
+
+bullet1.tooltipText = "Killer Age: [bold]{valueX}[/] ; Count: [bold]{value}[/]";
+
+var series2 = chart.series.push(new am4charts.LineSeries());
+series2.dataFields.valueX = "Age";
+series2.dataFields.valueY = "Victim count";
+series2.dataFields.value = "Victim count";
+series2.strokeWidth = 2;
+series2.name = 'Victim Age';
+
+
+var bullet2 = series2.bullets.push(new am4charts.CircleBullet());
+
+bullet2.tooltipText = "Victim Age: [bold]{valueX}[/] ; Count: [bold]{value}[/]";
+
+//scrollbars
+chart.scrollbarX = new am4core.Scrollbar();
+chart.scrollbarY = new am4core.Scrollbar();
+
+// Add legend
+chart.legend = new am4charts.Legend();
+
+}); // end am4core.ready()
+</script>
+
+<script>
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_material);
+// Themes end
+
+// Create chart instance
+var chart = am4core.create("killer_race", am4charts.PieChart);
+
+// Add and configure Series
+var pieSeries = chart.series.push(new am4charts.PieSeries());
+pieSeries.dataFields.value = "Incident";
+pieSeries.dataFields.category = "Perpetrator Race";
+
+
+// Let's cut a hole in our Pie chart the size of 30% the radius
+chart.innerRadius = am4core.percent(30);
+
+// Put a thick white border around each Slice
+pieSeries.slices.template.stroke = am4core.color("#fff");
+pieSeries.slices.template.strokeWidth = 2;
+pieSeries.slices.template.strokeOpacity = 1;
+pieSeries.slices.template
+  // change the cursor on hover to make it apparent the object can be interacted with
+  .cursorOverStyle = [
+    {
+      "property": "cursor",
+      "value": "pointer"
+    }
+  ];
+
+
+
+// Create a base filter effect (as if it's not there) for the hover to return to
+var shadow = pieSeries.slices.template.filters.push(new am4core.DropShadowFilter);
+shadow.opacity = 0;
+
+// Create hover state
+var hoverState = pieSeries.slices.template.states.getKey("hover"); // normally we have to create the hover state, in this case it already exists
+
+// Slightly shift the shadow and make it more prominent on hover
+var hoverShadow = hoverState.filters.push(new am4core.DropShadowFilter);
+hoverShadow.opacity = 0.7;
+hoverShadow.blur = 5;
+
+// Add label
+chart.innerRadius = 70;
+var label = chart.seriesContainer.createChild(am4core.Label);
+label.text = "Killer";
+label.horizontalCenter = "middle";
+label.verticalCenter = "middle";
+label.fontSize = 40;
+label.fontWeight = true;
+
+
+// Add a legend
+chart.legend = new am4charts.Legend();
+
+chart.data = [
+   {
+      "Perpetrator Race": "Unknown",
+      "Incident": 5098755
+   },
+   {
+      "Perpetrator Race": "Black",
+      "Incident": 4997593
+   },
+   {
+      "Perpetrator Race": "White",
+      "Incident": 4480919
+   },
+   {
+      "Perpetrator Race": "Asian/Pacific Islander",
+      "Incident": 69525
+   },
+   {
+      "Perpetrator Race": "Native American/Alaska Native",
+      "Incident": 17171
+   }
+];
+
+
+
+}); // end am4core.ready()
+
+/* change labels style
+pieSeries.alignLabels = false;
+pieSeries.labels.template.bent = false;
+pieSeries.labels.template.radius = 5;
+pieSeries.labels.template.padding(0,0,0,0);
+
+pieSeries.ticks.template.disabled = true;
+*/
+</script>
+
+<script>
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_material);
+// Themes end
+
+// Create chart instance
+var chart = am4core.create("victim_race", am4charts.PieChart);
+
+// Add and configure Series
+var pieSeries = chart.series.push(new am4charts.PieSeries());
+pieSeries.dataFields.value = "Victim";
+pieSeries.dataFields.category = "Victim Race";
+
+
+// Let's cut a hole in our Pie chart the size of 30% the radius
+chart.innerRadius = am4core.percent(30);
+
+// Put a thick white border around each Slice
+pieSeries.slices.template.stroke = am4core.color("#fff");
+pieSeries.slices.template.strokeWidth = 2;
+pieSeries.slices.template.strokeOpacity = 1;
+pieSeries.slices.template
+  // change the cursor on hover to make it apparent the object can be interacted with
+  .cursorOverStyle = [
+    {
+      "property": "cursor",
+      "value": "pointer"
+    }
+  ];
+
+
+
+// Create a base filter effect (as if it's not there) for the hover to return to
+var shadow = pieSeries.slices.template.filters.push(new am4core.DropShadowFilter);
+shadow.opacity = 0;
+
+// Create hover state
+var hoverState = pieSeries.slices.template.states.getKey("hover"); // normally we have to create the hover state, in this case it already exists
+
+// Slightly shift the shadow and make it more prominent on hover
+var hoverShadow = hoverState.filters.push(new am4core.DropShadowFilter);
+hoverShadow.opacity = 0.7;
+hoverShadow.blur = 5;
+
+// Add label
+chart.innerRadius = 70;
+var label = chart.seriesContainer.createChild(am4core.Label);
+label.text = "Victim";
+label.horizontalCenter = "middle";
+label.verticalCenter = "middle";
+label.fontSize = 40;
+label.fontWeight = true;
+
+
+// Add a legend
+chart.legend = new am4charts.Legend();
+
+chart.data = [
+   {
+      "Victim Race": "Unknown",
+      "Victim": 129347
+   },
+   {
+      "Victim Race": "Black",
+      "Victim": 7595658
+   },
+   {
+      "Victim Race": "White",
+      "Victim": 6782048
+   },
+   {
+      "Victim Race": "Asian/Pacific Islander",
+      "Victim": 130487
+   },
+   {
+      "Victim Race": "Native American/Alaska Native",
+      "Victim": 26423
+   }
+];
+
+
+
+}); // end am4core.ready()
+
+/* change labels style
+pieSeries.alignLabels = false;
+pieSeries.labels.template.bent = false;
+pieSeries.labels.template.radius = 5;
+pieSeries.labels.template.padding(0,0,0,0);
+
+pieSeries.ticks.template.disabled = true;
+*/
+</script>

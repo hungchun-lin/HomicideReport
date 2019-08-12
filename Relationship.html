@@ -1,0 +1,915 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>America Homicide Reports</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="Relationship.css" title="style" />
+  <script type="text/javascript"
+	        src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript"
+			src="Relationship.js"></script>
+  <!-- Resources -->
+	<script src="https://www.amcharts.com/lib/4/core.js"></script>
+	<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+	<script src="https://www.amcharts.com/lib/4/themes/kelly.js"></script>
+	<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+	<script src="https://www.amcharts.com/lib/4/themes/dataviz.js"></script>
+
+
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <h1><a href="index.html">U.S.A. Homicide Report<span class="logo_color"> </br></span></a></h1>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <li><a href="index.html">Overview</a></li>
+          <li><a href="Geographical.html">Geographical</a></li>
+          <li><a href="Human.html">Human</a></li>
+          <li><a href="Weapon.html">Weapon</a></li>
+          <li class="selected"><a href="Relationship.html">Relationship</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+      <div class="sidebar">
+        <h3>Designer</h3>
+        <h4>HungChun Lin</h4>
+		<h5>Data Science Program
+		</br>Columbian College of Arts and Sciences</br>George Washington University</h5>
+        <h5><a href="hungchun_lin@gwu.edu">hungchun_lin@gwu.edu</a></h5>
+        <p>This website is my first project for visualizing the complex data<br /></p>
+        <h5>Instructor: Dr. Nima Zahadat</h5>
+		
+        <h3>Resourse Links</h3>
+        <ul>
+		  <li><a href="https://www.kaggle.com/">Kaggle Datasets</a></li>
+		  <li><a href="https://www.worldbank.org/">World Bank</a></li>
+		  <li><a href="https://www.amcharts.com/about/">amCharts</a></li>
+		  <li><a href="https://www.freeformatter.com/csv-to-json-converter.html#ad-output">FreeFormatter</a></li>
+          <li><a href="https://developers.google.com/chart/interactive/docs/gallery">Google Gallery</a></li>
+          <li><a href="https://www.data.gov/">Government Datasets</a></li>
+          <li><a href="https://www.plot.ly/">Plotly</a></li>
+        </ul>
+      </div>
+    <div id="content">
+        <h1>Relationship</h1>
+        <p>In each relationship, it remains different risk in it. However, some kinds of relationship are much more easily to get into trouble. From this report, we can easily find out which relationship has the highest risk in it.In each relationship, it remains a different risk in it. However, some kinds of relationship are much more easy to get into trouble. From this report, we can easily find out which relationship has the highest risk in it.	</p>
+		</br>
+	
+	<br /><br /><br />
+	
+	<!--D3-->
+	<div class="graph">
+	<div class="image_description">The relationship of the perpetrators</div>
+	<div id="relation_killer"
+			style="width:680px; height:550px;"></div>
+			
+	<p>From this plot, it shows that the relationship contains the higher risk is <span class='highlight_color_red'>Stranger </span> and the second is <span class='highlight_color_red'>Acquaintance</span>.</p>
+			
+	<br /><br /><br />
+	
+	<div class="graph">
+	<div class="image_description">The relationship of the victims</div>
+	<div id="relation_victim"
+			style="width:680px; height:550px;"></div>
+			
+	<p>From the view of victim, it shows that the relationship contains the higher risk is also about <span class='highlight_color_red'>Stranger </span> and the second is <span class='highlight_color_red'>Acquaintance</span>, but the thing worth to mention is that  <span class='highlight_color_red'>Wife </span>also has the not low risk to be killed.</p>
+
+<br /><br /><br />
+
+    </div><!--Google API-->
+	</div>
+	</div><!--content-->
+    </div><!--site_content-->
+    <h6>*Icons made by <a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" 
+	title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"  
+	title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></h6>
+
+    <div id="content_footer"></div>
+    <div id="footer">
+      Copyright &copy; <script>var d = new Date(); document.write(d.getFullYear());</script>
+    </div>
+  </div><!--main-->
+    
+</body>
+</html>
+
+
+<!-- Chart code -->
+<script>
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_dataviz);
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+/**
+ * Chart design inspired by Nicolas Rapp: https://nicolasrapp.com/studio/
+ */
+
+var chart = am4core.create("relation_killer", am4charts.RadarChart);
+
+chart.data = [
+   {
+      "Relationship": "Acquaintance",
+      "Female Perpetrator": 56354,
+      "Male Perpetrator": 760135
+   },
+   {
+      "Relationship": "Boyfriend",
+      "Female Perpetrator": 46279,
+      "Male Perpetrator": 2335
+   },
+   {
+      "Relationship": "Boyfriend/Girlfriend",
+      "Female Perpetrator": 1363,
+      "Male Perpetrator": 9579
+   },
+   {
+      "Relationship": "Brother",
+      "Female Perpetrator": 6964,
+      "Male Perpetrator": 72746
+   },
+   {
+      "Relationship": "Common-Law Husband",
+      "Female Perpetrator": 22983,
+      "Male Perpetrator": 795
+   },
+   {
+      "Relationship": "Common-Law Wife",
+      "Female Perpetrator": 188,
+      "Male Perpetrator": 28476
+   },
+   {
+      "Relationship": "Daughter",
+      "Female Perpetrator": 70859,
+      "Male Perpetrator": 82521
+   },
+   {
+      "Relationship": "Employee",
+      "Female Perpetrator": 130,
+      "Male Perpetrator": 1236
+   },
+   {
+      "Relationship": "Employer",
+      "Female Perpetrator": 233,
+      "Male Perpetrator": 3089
+   },
+   {
+      "Relationship": "Ex-Husband",
+      "Female Perpetrator": 2269,
+      "Male Perpetrator": 123
+   },
+   {
+      "Relationship": "Ex-Wife",
+      "Female Perpetrator": 12,
+      "Male Perpetrator": 6034
+   },
+   {
+      "Relationship": "Family",
+      "Female Perpetrator": 28535,
+      "Male Perpetrator": 198181
+   },
+   {
+      "Relationship": "Father",
+      "Female Perpetrator": 6071,
+      "Male Perpetrator": 86239
+   },
+   {
+      "Relationship": "Friend",
+      "Female Perpetrator": 23325,
+      "Male Perpetrator": 240762
+   },
+   {
+      "Relationship": "Girlfriend",
+      "Female Perpetrator": 627,
+      "Male Perpetrator": 91824
+   },
+   {
+      "Relationship": "Husband",
+      "Female Perpetrator": 104629,
+      "Male Perpetrator": 6746
+   },
+   {
+      "Relationship": "In-Law",
+      "Female Perpetrator": 1284,
+      "Male Perpetrator": 14024
+   },
+   {
+      "Relationship": "Mother",
+      "Female Perpetrator": 15605,
+      "Male Perpetrator": 73467
+   },
+   {
+      "Relationship": "Neighbor",
+      "Female Perpetrator": 3185,
+      "Male Perpetrator": 28343
+   },
+   {
+      "Relationship": "Sister",
+      "Female Perpetrator": 1466,
+      "Male Perpetrator": 17420
+   },
+   {
+      "Relationship": "Son",
+      "Female Perpetrator": 84787,
+      "Male Perpetrator": 131637
+   },
+   {
+      "Relationship": "Stepdaughter",
+      "Female Perpetrator": 168,
+      "Male Perpetrator": 2279
+   },
+   {
+      "Relationship": "Stepfather",
+      "Female Perpetrator": 922,
+      "Male Perpetrator": 4586
+   },
+   {
+      "Relationship": "Stepmother",
+      "Female Perpetrator": 151,
+      "Male Perpetrator": 398
+   },
+   {
+      "Relationship": "Stepson",
+      "Female Perpetrator": 190,
+      "Male Perpetrator": 5287
+   },
+   {
+      "Relationship": "Stranger",
+      "Female Perpetrator": 26491,
+      "Male Perpetrator": 906427
+   },
+ 
+   {
+      "Relationship": "Wife",
+      "Female Perpetrator": 2027,
+      "Male Perpetrator": 498922
+   }
+];
+
+
+chart.padding(0, 0, 0, 0);
+chart.radarContainer.dy = 50;
+chart.innerRadius = am4core.percent(50);
+chart.radius = am4core.percent(100);
+chart.zoomOutButton.padding(20,20,20,20);
+chart.zoomOutButton.margin(20,20,20,20);
+chart.zoomOutButton.background.cornerRadius(40,40,40,40);
+chart.zoomOutButton.valign = "bottom";
+
+var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+categoryAxis.dataFields.category = "Relationship";
+categoryAxis.renderer.labels.template.location = 0.5;
+categoryAxis.mouseEnabled = false;
+
+var categoryAxisRenderer = categoryAxis.renderer;
+categoryAxisRenderer.cellStartLocation = 0;
+categoryAxisRenderer.tooltipLocation = 0.5;
+categoryAxisRenderer.grid.template.disabled = true;
+categoryAxisRenderer.ticks.template.disabled = true;
+
+categoryAxisRenderer.axisFills.template.fill = am4core.color("#e8e8e8");
+categoryAxisRenderer.axisFills.template.fillOpacity = 0.2;
+categoryAxisRenderer.axisFills.template.location = -0.5;
+categoryAxisRenderer.line.disabled = true;
+categoryAxisRenderer.tooltip.disabled = true;
+categoryAxis.renderer.labels.template.disabled = true;
+
+categoryAxis.adapter.add("maxZoomFactor", function(maxZoomFactor, target) {
+  return target.dataItems.length / 5;
+})
+
+var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+var valueAxisRenderer = valueAxis.renderer;
+
+valueAxisRenderer.line.disabled = true;
+valueAxisRenderer.grid.template.disabled = true;
+valueAxisRenderer.ticks.template.disabled = true;
+valueAxis.min = 0;
+valueAxis.renderer.tooltip.disabled = true;
+
+var series1 = chart.series.push(new am4charts.RadarSeries());
+series1.name = "Female Perpetrator";
+series1.dataFields.categoryX = "Relationship";
+series1.dataFields.valueY = "Female Perpetrator";
+series1.stacked = true;
+series1.fillOpacity = 0.5;
+series1.fill = chart.colors.getIndex(0);
+series1.strokeOpacity = 0;
+series1.dataItems.template.locations.categoryX = 0.5;
+series1.sequencedInterpolation = true;
+series1.sequencedInterpolationDelay = 50;
+
+var series2 = chart.series.push(new am4charts.RadarSeries());
+series2.name = "Male Perpetrator";
+series2.dataFields.categoryX = "Relationship";
+series2.dataFields.valueY = "Male Perpetrator";
+series2.stacked = true;
+series2.fillOpacity = 0.5;
+series2.fill = chart.colors.getIndex(1);
+series2.stacked = true;
+series2.strokeOpacity = 0;
+series2.dataItems.template.locations.categoryX = 0.5;
+series2.sequencedInterpolation = true;
+series2.sequencedInterpolationDelay = 50;
+series2.tooltipText = "[bold]{categoryX}[/]\Male: {Male Perpetrator} \Female: {Female Perpetrator}";
+series2.tooltip.pointerOrientation = "vertical";
+series2.tooltip.label.fill = am4core.color("#ffffff");
+series2.tooltip.label.fontSize = "1.2em";
+series2.tooltip.autoTextColor = false;
+
+chart.seriesContainer.zIndex = -1;
+chart.scrollbarX = new am4core.Scrollbar();
+chart.scrollbarX.parent = chart.bottomAxesContainer;
+chart.scrollbarX.exportable = false;
+chart.scrollbarY = new am4core.Scrollbar();
+chart.scrollbarY.exportable = false;
+
+chart.padding(0, 0, 0, 0)
+
+chart.scrollbarY.padding(20, 0, 20, 0);
+chart.scrollbarX.padding(0, 20, 0, 80);
+
+chart.scrollbarY.background.padding(20, 0, 20, 0);
+chart.scrollbarX.background.padding(0, 20, 0, 80);
+
+
+chart.cursor = new am4charts.RadarCursor();
+chart.cursor.lineX.strokeOpacity = 1;
+chart.cursor.lineY.strokeOpacity = 0;
+chart.cursor.lineX.stroke = chart.colors.getIndex(1);
+chart.cursor.innerRadius = am4core.percent(30);
+chart.cursor.radius = am4core.percent(50);
+chart.cursor.selection.fill = chart.colors.getIndex(1);
+
+let bullet = series2.bullets.create();
+bullet.fill = am4core.color("#000000");
+bullet.strokeOpacity = 0;
+bullet.locationX = 0.5;
+
+
+let line = bullet.createChild(am4core.Line);
+line.x2 = -100;
+line.x1 = 0;
+line.y1 = 0;
+line.y1 = 0;
+line.strokeOpacity = 1;
+
+line.stroke = am4core.color("#000000");
+line.strokeDasharray = "2,3";
+line.strokeOpacity = 0.4;
+
+
+let bulletValueLabel = bullet.createChild(am4core.Label);
+bulletValueLabel.text = "{valueY.total.formatNumber('#.0')}";
+bulletValueLabel.verticalCenter = "middle";
+bulletValueLabel.horizontalCenter = "right";
+bulletValueLabel.dy = -3;
+
+let label = bullet.createChild(am4core.Label);
+label.text = "{categoryX}";
+label.verticalCenter = "middle";
+label.paddingLeft = 20;
+
+valueAxis.calculateTotals = true;
+
+
+chart.legend = new am4charts.Legend();
+chart.legend.parent = chart.radarContainer;
+chart.legend.width = 110;
+chart.legend.horizontalCenter = "middle";
+chart.legend.markers.template.width = 22;
+chart.legend.markers.template.height = 18;
+chart.legend.markers.template.dy = 2;
+chart.legend.labels.template.fontSize = "1.0em";
+chart.legend.dy = 20;
+chart.legend.dx = -9;
+
+chart.legend.itemContainers.template.cursorOverStyle = am4core.MouseCursorStyle.pointer;
+let itemHoverState = chart.legend.itemContainers.template.states.create("hover");
+itemHoverState.properties.dx = 5;
+
+let title = chart.radarContainer.createChild(am4core.Label);
+title.text = "COMPANIES WITH\nTHE MOST CASH\nHELD OVERSEAS"
+title.fontSize = "1.2em";
+title.verticalCenter = "bottom";
+title.textAlign = "middle";
+title.horizontalCenter = "middle";
+title.fontWeigth = "800";
+
+chart.maskBullets = false;
+
+let circle = bullet.createChild(am4core.Circle);
+circle.radius = 2;
+let hoverState = circle.states.create("hover");
+
+hoverState.properties.scale = 5;
+
+bullet.events.on("positionchanged", function(event) {
+    event.target.children.getIndex(0).invalidate();
+    event.target.children.getIndex(1).invalidatePosition();
+})
+
+
+bullet.adapter.add("dx", function(dx, target) {
+  let angle = categoryAxis.getAngle(target.dataItem, "categoryX", 0.5);
+  return 20 * am4core.math.cos(angle);
+})
+
+bullet.adapter.add("dy", function(dy, target) {
+  let angle = categoryAxis.getAngle(target.dataItem, "categoryX", 0.5);
+  return 20 * am4core.math.sin(angle);
+})
+
+bullet.adapter.add("rotation", function(dy, target) {
+  let angle = Math.min(chart.endAngle, Math.max(chart.startAngle, categoryAxis.getAngle(target.dataItem, "categoryX", 0.5)));
+  return angle;
+})
+
+
+line.adapter.add("x2", function(x2, target) {
+  let dataItem = target.dataItem;
+  if (dataItem) {
+    let position = valueAxis.valueToPosition(dataItem.values.valueY.value + dataItem.values.valueY.stack);
+    return -(position * valueAxis.axisFullLength + 35);
+  }
+  return 0;
+})
+
+
+bulletValueLabel.adapter.add("dx", function(dx, target) {
+  let dataItem = target.dataItem;
+
+  if (dataItem) {
+    let position = valueAxis.valueToPosition(dataItem.values.valueY.value + dataItem.values.valueY.stack);
+    return -(position * valueAxis.axisFullLength + 40);
+  }
+  return 0;
+})
+
+
+chart.seriesContainer.zIndex = 10;
+categoryAxis.zIndex = 11;
+valueAxis.zIndex = 12;
+
+chart.radarContainer.zIndex = 20;
+
+
+let previousBullets = [];
+series2.events.on("tooltipshownat", function(event) {
+  let dataItem = event.dataItem;
+
+  for (let i = 0; i < previousBullets.length; i++) {
+    previousBullets[i].isHover = false;
+  }
+
+  previousBullets = [];
+
+  let itemBullet = dataItem.bullets.getKey(bullet.uid);
+
+  for (let i = 0; i < itemBullet.children.length; i++) {
+    let sprite = itemBullet.children.getIndex(i);
+    sprite.isHover = true;
+    previousBullets.push(sprite);
+  }
+})
+
+series2.tooltip.events.on("visibilitychanged", function() {
+  if (!series2.tooltip.visible) {
+    for (let i = 0; i < previousBullets.length; i++) {
+      previousBullets[i].isHover = false;
+    }
+  }
+})
+
+chart.events.on("maxsizechanged", function() {
+  if(chart.pixelInnerRadius < 200){
+    title.disabled = true;
+    chart.legend.verticalCenter = "middle";
+    chart.legend.dy = 0;
+  }
+  else{
+    title.disabled = false;
+    chart.legend.verticalCenter = "top";
+    chart.legend.dy = 20;
+  }
+})
+
+}); // end am4core.ready()
+</script>
+
+<script>
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_dataviz);
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+/**
+ * Chart design inspired by Nicolas Rapp: https://nicolasrapp.com/studio/
+ */
+
+var chart = am4core.create("relation_victim", am4charts.RadarChart);
+
+chart.data = [
+   {
+      "Relationship": "Acquaintance",
+      "Female Victim": 110644,
+      "Male Victim": 756192
+   },
+   {
+      "Relationship": "Boyfriend",
+      "Female Victim": 932,
+      "Male Victim": 47999
+   },
+   {
+      "Relationship": "Boyfriend/Girlfriend",
+      "Female Victim": 1358,
+      "Male Victim": 10978
+   },
+   {
+      "Relationship": "Brother",
+      "Female Victim": 435,
+      "Male Victim": 79862
+   },
+   {
+      "Relationship": "Common-Law Husband",
+      "Female Victim": 75,
+      "Male Victim": 23929
+   },
+   {
+      "Relationship": "Common-Law Wife",
+      "Female Victim": 28523,
+      "Male Victim": 436
+   },
+   {
+      "Relationship": "Daughter",
+      "Female Victim": 153108,
+      "Male Victim": 1690
+   },
+   {
+      "Relationship": "Employee",
+      "Female Victim": 206,
+      "Male Victim": 1176
+   },
+   {
+      "Relationship": "Employer",
+      "Female Victim": 861,
+      "Male Victim": 2461
+   },
+   {
+      "Relationship": "Ex-Husband",
+      "Female Victim": 72,
+      "Male Victim": 2327
+   },
+   {
+      "Relationship": "Ex-Wife",
+      "Female Victim": 5746,
+      "Male Victim": 351
+   },
+   {
+      "Relationship": "Family",
+      "Female Victim": 88926,
+      "Male Victim": 139348
+   },
+   {
+      "Relationship": "Father",
+      "Female Victim": 637,
+      "Male Victim": 92665
+   },
+   {
+      "Relationship": "Friend",
+      "Female Victim": 39905,
+      "Male Victim": 228678
+   },
+   {
+      "Relationship": "Girlfriend",
+      "Female Victim": 91966,
+      "Male Victim": 1326
+   },
+   {
+      "Relationship": "Husband",
+      "Female Victim": 841,
+      "Male Victim": 110965
+   },
+   {
+      "Relationship": "In-Law",
+      "Female Victim": 3042,
+      "Male Victim": 12301
+   },
+   {
+      "Relationship": "Mother",
+      "Female Victim": 88038,
+      "Male Victim": 1182
+   },
+   {
+      "Relationship": "Neighbor",
+      "Female Victim": 7191,
+      "Male Victim": 24564
+   },
+   {
+      "Relationship": "Sister",
+      "Female Victim": 19275,
+      "Male Victim": 198
+   },
+   {
+      "Relationship": "Son",
+      "Female Victim": 5140,
+      "Male Victim": 213192
+   },
+   {
+      "Relationship": "Stepdaughter",
+      "Female Victim": 2356,
+      "Male Victim": 89
+   },
+   {
+      "Relationship": "Stepfather",
+      "Female Victim": 126,
+      "Male Victim": 5391
+   },
+   {
+      "Relationship": "Stepmother",
+      "Female Victim": 479,
+      "Male Victim": 70
+   },
+   {
+      "Relationship": "Stepson",
+      "Female Victim": 395,
+      "Male Victim": 5084
+   },
+   {
+      "Relationship": "Stranger",
+      "Female Victim": 109074,
+      "Male Victim": 1029340
+   },
+   {
+      "Relationship": "Wife",
+      "Female Victim": 501832,
+      "Male Victim": 1870
+   }
+];
+
+
+chart.padding(0, 0, 0, 0);
+chart.radarContainer.dy = 50;
+chart.innerRadius = am4core.percent(50);
+chart.radius = am4core.percent(100);
+chart.zoomOutButton.padding(20,20,20,20);
+chart.zoomOutButton.margin(20,20,20,20);
+chart.zoomOutButton.background.cornerRadius(40,40,40,40);
+chart.zoomOutButton.valign = "bottom";
+
+var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+categoryAxis.dataFields.category = "Relationship";
+categoryAxis.renderer.labels.template.location = 0.5;
+categoryAxis.mouseEnabled = false;
+
+var categoryAxisRenderer = categoryAxis.renderer;
+categoryAxisRenderer.cellStartLocation = 0;
+categoryAxisRenderer.tooltipLocation = 0.5;
+categoryAxisRenderer.grid.template.disabled = true;
+categoryAxisRenderer.ticks.template.disabled = true;
+
+categoryAxisRenderer.axisFills.template.fill = am4core.color("#e8e8e8");
+categoryAxisRenderer.axisFills.template.fillOpacity = 0.2;
+categoryAxisRenderer.axisFills.template.location = -0.5;
+categoryAxisRenderer.line.disabled = true;
+categoryAxisRenderer.tooltip.disabled = true;
+categoryAxis.renderer.labels.template.disabled = true;
+
+categoryAxis.adapter.add("maxZoomFactor", function(maxZoomFactor, target) {
+  return target.dataItems.length / 5;
+})
+
+var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+var valueAxisRenderer = valueAxis.renderer;
+
+valueAxisRenderer.line.disabled = true;
+valueAxisRenderer.grid.template.disabled = true;
+valueAxisRenderer.ticks.template.disabled = true;
+valueAxis.min = 0;
+valueAxis.renderer.tooltip.disabled = true;
+
+var series1 = chart.series.push(new am4charts.RadarSeries());
+series1.name = "Female Victim";
+series1.dataFields.categoryX = "Relationship";
+series1.dataFields.valueY = "Female Victim";
+series1.stacked = true;
+series1.fillOpacity = 0.5;
+series1.fill = chart.colors.getIndex(0);
+series1.strokeOpacity = 0;
+series1.dataItems.template.locations.categoryX = 0.5;
+series1.sequencedInterpolation = true;
+series1.sequencedInterpolationDelay = 50;
+
+var series2 = chart.series.push(new am4charts.RadarSeries());
+series2.name = "Male Victim";
+series2.dataFields.categoryX = "Relationship";
+series2.dataFields.valueY = "Male Victim";
+series2.stacked = true;
+series2.fillOpacity = 0.5;
+series2.fill = chart.colors.getIndex(1);
+series2.stacked = true;
+series2.strokeOpacity = 0;
+series2.dataItems.template.locations.categoryX = 0.5;
+series2.sequencedInterpolation = true;
+series2.sequencedInterpolationDelay = 50;
+series2.tooltipText = "[bold]{categoryX}[/]\Male: {Male Victim} \Female: {Female Victim}";
+series2.tooltip.pointerOrientation = "vertical";
+series2.tooltip.label.fill = am4core.color("#ffffff");
+series2.tooltip.label.fontSize = "1.2em";
+series2.tooltip.autoTextColor = false;
+
+chart.seriesContainer.zIndex = -1;
+chart.scrollbarX = new am4core.Scrollbar();
+chart.scrollbarX.parent = chart.bottomAxesContainer;
+chart.scrollbarX.exportable = false;
+chart.scrollbarY = new am4core.Scrollbar();
+chart.scrollbarY.exportable = false;
+
+chart.padding(0, 0, 0, 0)
+
+chart.scrollbarY.padding(20, 0, 20, 0);
+chart.scrollbarX.padding(0, 20, 0, 80);
+
+chart.scrollbarY.background.padding(20, 0, 20, 0);
+chart.scrollbarX.background.padding(0, 20, 0, 80);
+
+
+chart.cursor = new am4charts.RadarCursor();
+chart.cursor.lineX.strokeOpacity = 1;
+chart.cursor.lineY.strokeOpacity = 0;
+chart.cursor.lineX.stroke = chart.colors.getIndex(1);
+chart.cursor.innerRadius = am4core.percent(30);
+chart.cursor.radius = am4core.percent(50);
+chart.cursor.selection.fill = chart.colors.getIndex(1);
+
+let bullet = series2.bullets.create();
+bullet.fill = am4core.color("#000000");
+bullet.strokeOpacity = 0;
+bullet.locationX = 0.5;
+
+
+let line = bullet.createChild(am4core.Line);
+line.x2 = -100;
+line.x1 = 0;
+line.y1 = 0;
+line.y1 = 0;
+line.strokeOpacity = 1;
+
+line.stroke = am4core.color("#000000");
+line.strokeDasharray = "2,3";
+line.strokeOpacity = 0.4;
+
+
+let bulletValueLabel = bullet.createChild(am4core.Label);
+bulletValueLabel.text = "{valueY.total.formatNumber('#.0')}";
+bulletValueLabel.verticalCenter = "middle";
+bulletValueLabel.horizontalCenter = "right";
+bulletValueLabel.dy = -3;
+
+let label = bullet.createChild(am4core.Label);
+label.text = "{categoryX}";
+label.verticalCenter = "middle";
+label.paddingLeft = 20;
+
+valueAxis.calculateTotals = true;
+
+
+chart.legend = new am4charts.Legend();
+chart.legend.parent = chart.radarContainer;
+chart.legend.width = 110;
+chart.legend.horizontalCenter = "middle";
+chart.legend.markers.template.width = 22;
+chart.legend.markers.template.height = 18;
+chart.legend.markers.template.dy = 2;
+chart.legend.labels.template.fontSize = "1.0em";
+chart.legend.dy = 20;
+chart.legend.dx = -9;
+
+chart.legend.itemContainers.template.cursorOverStyle = am4core.MouseCursorStyle.pointer;
+let itemHoverState = chart.legend.itemContainers.template.states.create("hover");
+itemHoverState.properties.dx = 5;
+
+let title = chart.radarContainer.createChild(am4core.Label);
+title.text = "COMPANIES WITH\nTHE MOST CASH\nHELD OVERSEAS"
+title.fontSize = "1.2em";
+title.verticalCenter = "bottom";
+title.textAlign = "middle";
+title.horizontalCenter = "middle";
+title.fontWeigth = "800";
+
+chart.maskBullets = false;
+
+let circle = bullet.createChild(am4core.Circle);
+circle.radius = 2;
+let hoverState = circle.states.create("hover");
+
+hoverState.properties.scale = 5;
+
+bullet.events.on("positionchanged", function(event) {
+    event.target.children.getIndex(0).invalidate();
+    event.target.children.getIndex(1).invalidatePosition();
+})
+
+
+bullet.adapter.add("dx", function(dx, target) {
+  let angle = categoryAxis.getAngle(target.dataItem, "categoryX", 0.5);
+  return 20 * am4core.math.cos(angle);
+})
+
+bullet.adapter.add("dy", function(dy, target) {
+  let angle = categoryAxis.getAngle(target.dataItem, "categoryX", 0.5);
+  return 20 * am4core.math.sin(angle);
+})
+
+bullet.adapter.add("rotation", function(dy, target) {
+  let angle = Math.min(chart.endAngle, Math.max(chart.startAngle, categoryAxis.getAngle(target.dataItem, "categoryX", 0.5)));
+  return angle;
+})
+
+
+line.adapter.add("x2", function(x2, target) {
+  let dataItem = target.dataItem;
+  if (dataItem) {
+    let position = valueAxis.valueToPosition(dataItem.values.valueY.value + dataItem.values.valueY.stack);
+    return -(position * valueAxis.axisFullLength + 35);
+  }
+  return 0;
+})
+
+
+bulletValueLabel.adapter.add("dx", function(dx, target) {
+  let dataItem = target.dataItem;
+
+  if (dataItem) {
+    let position = valueAxis.valueToPosition(dataItem.values.valueY.value + dataItem.values.valueY.stack);
+    return -(position * valueAxis.axisFullLength + 40);
+  }
+  return 0;
+})
+
+
+chart.seriesContainer.zIndex = 10;
+categoryAxis.zIndex = 11;
+valueAxis.zIndex = 12;
+
+chart.radarContainer.zIndex = 20;
+
+
+let previousBullets = [];
+series2.events.on("tooltipshownat", function(event) {
+  let dataItem = event.dataItem;
+
+  for (let i = 0; i < previousBullets.length; i++) {
+    previousBullets[i].isHover = false;
+  }
+
+  previousBullets = [];
+
+  let itemBullet = dataItem.bullets.getKey(bullet.uid);
+
+  for (let i = 0; i < itemBullet.children.length; i++) {
+    let sprite = itemBullet.children.getIndex(i);
+    sprite.isHover = true;
+    previousBullets.push(sprite);
+  }
+})
+
+series2.tooltip.events.on("visibilitychanged", function() {
+  if (!series2.tooltip.visible) {
+    for (let i = 0; i < previousBullets.length; i++) {
+      previousBullets[i].isHover = false;
+    }
+  }
+})
+
+chart.events.on("maxsizechanged", function() {
+  if(chart.pixelInnerRadius < 200){
+    title.disabled = true;
+    chart.legend.verticalCenter = "middle";
+    chart.legend.dy = 0;
+  }
+  else{
+    title.disabled = false;
+    chart.legend.verticalCenter = "top";
+    chart.legend.dy = 20;
+  }
+})
+
+}); // end am4core.ready()
+</script>

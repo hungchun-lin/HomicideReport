@@ -1,0 +1,304 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>America Homicide Reports</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="index.css" title="style" />
+  <script type="text/javascript"
+	        src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript"
+			src="index.js"></script>
+  <!-- Resources -->
+	<script src="https://www.amcharts.com/lib/4/core.js"></script>
+	<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+	<script src="https://www.amcharts.com/lib/4/themes/kelly.js"></script>
+	<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <h1><a href="index.html">U.S.A. Homicide Report<span class="logo_color"> </br></span></a></h1>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <li class="selected"><a href="index.html">Overview</a></li>
+          <li><a href="Geographical.html">Geographical</a></li>
+          <li><a href="Human.html">Human</a></li>
+          <li><a href="Weapon.html">Weapon</a></li>
+          <li><a href="Relationship.html">Relationship</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+      <div class="sidebar">
+        <h3>Designer</h3>
+        <h4>HungChun Lin</h4>
+		<h5>Data Science Program
+		</br>Columbian College of Arts and Sciences</br>George Washington University</h5>
+        <h5><a href="hungchun_lin@gwu.edu">hungchun_lin@gwu.edu</a></h5>
+        <p>This website is the project for visualizing the complex data<br /></p>
+        <h5>Instructor: Dr. Nima Zahadat</h5>
+		
+        <h3>Resourse Links</h3>
+        <ul>
+		  <li><a href="https://www.kaggle.com/">Kaggle Datasets</a></li>
+		  <li><a href="https://www.worldbank.org/">World Bank</a></li>
+		  <li><a href="https://www.amcharts.com/about/">amCharts</a></li>
+		  <li><a href="https://www.freeformatter.com/csv-to-json-converter.html#ad-output">FreeFormatter</a></li>
+          <li><a href="https://developers.google.com/chart/interactive/docs/gallery">Google Gallery</a></li>
+          <li><a href="https://www.data.gov/">Government Datasets</a></li>
+          <li><a href="https://www.plot.ly/">Plotly</a></li>
+        </ul>
+      </div>
+    <div id="content">
+        <h1>Introduction</h1>
+        <p>This report collected over than 22,000 homicides which were got from FBI's Supplementary Homicide Report and 
+		Freedom of Information Act from 1980 to 2014. The dataset I used for this report can be found at <a href="https://www.kaggle.com/murderaccountability/homicide-reports/downloads/homicide-reports.zip/1">Kaggle</a>
+		, and it was compiled and made available by the Murder Accountability Project, founded by Thomas Hargrove. </br>
+		&nbsp &nbsp &nbsp &nbsp In the following analysis, we will be looking for the distribution of the homicide incidents in the USA, the 
+		sex/race/age of the perpetrator and the victim and also looking for the most used weapon.
+		</p>
+		</br>
+	
+	<br /><br /><br />
+	
+	<!--D3-->
+	<div class="graph">
+	<div class="image_description">The Homicide incident count from 1980 to 2014</div>
+	<div id="year"
+			style="width:650px; height:450px;"></div>
+			
+	<p>From this line chart, we can see the homicide incident <span class='highlight_color_red'>decreased</span> from <span class='highlight_color_pink'>1991</span> and touched the bottom in 2000, 
+	but after that, it <span class='highlight_color_red'>increased rapidly</span> again from <span class='highlight_color_pink'>2001</span> ,and reached the highest then did not down much till <span class='highlight_color_pink'>2014</span> . </p>
+			
+	<br /><br /><br /><br /><br /><br />
+	
+			
+    </div><!--Google API-->
+	</div><!--content-->
+    </div><!--site_content-->
+    <h6>*Icons made by <a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" 
+	title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"  
+	title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></h6>
+
+    <div id="content_footer"></div>
+    <div id="footer">
+      Copyright &copy; <script>var d = new Date(); document.write(d.getFullYear());</script>
+    </div>
+  </div><!--main-->
+    
+</body>
+</html>
+
+
+<!-- Chart code -->
+<script>
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_kelly);
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+// Create chart instance
+var chart = am4core.create("year", am4charts.XYChart);
+chart.scrollbarX = new am4core.Scrollbar();
+
+
+chart.data = [
+   {
+      "Year": 1980,
+      "Incident": 337811
+   },
+   {
+      "Year": 1981,
+      "Incident": 288723
+   },
+   {
+      "Year": 1982,
+      "Incident": 256729
+   },
+   {
+      "Year": 1983,
+      "Incident": 277582
+   },
+   {
+      "Year": 1984,
+      "Incident": 205706
+   },
+   {
+      "Year": 1985,
+      "Incident": 184987
+   },
+   {
+      "Year": 1986,
+      "Incident": 234804
+   },
+   {
+      "Year": 1987,
+      "Incident": 228873
+   },
+   {
+      "Year": 1988,
+      "Incident": 280701
+   },
+   {
+      "Year": 1989,
+      "Incident": 295626
+   },
+   {
+      "Year": 1990,
+      "Incident": 355167
+   },
+   {
+      "Year": 1991,
+      "Incident": 411287
+   },
+   {
+      "Year": 1992,
+      "Incident": 399589
+   },
+   {
+      "Year": 1993,
+      "Incident": 374439
+   },
+   {
+      "Year": 1994,
+      "Incident": 291291
+   },
+   {
+      "Year": 1995,
+      "Incident": 221691
+   },
+   {
+      "Year": 1996,
+      "Incident": 170674
+   },
+   {
+      "Year": 1997,
+      "Incident": 184478
+   },
+   {
+      "Year": 1998,
+      "Incident": 106918
+   },
+   {
+      "Year": 1999,
+      "Incident": 96225
+   },
+   {
+      "Year": 2000,
+      "Incident": 433147
+   },
+   {
+      "Year": 2001,
+      "Incident": 553063
+   },
+   {
+      "Year": 2002,
+      "Incident": 578363
+   },
+   {
+      "Year": 2003,
+      "Incident": 586452
+   },
+   {
+      "Year": 2004,
+      "Incident": 599697
+   },
+   {
+      "Year": 2005,
+      "Incident": 566273
+   },
+   {
+      "Year": 2006,
+      "Incident": 757590
+   },
+   {
+      "Year": 2007,
+      "Incident": 741799
+   },
+   {
+      "Year": 2008,
+      "Incident": 680645
+   },
+   {
+      "Year": 2009,
+      "Incident": 667447
+   },
+   {
+      "Year": 2010,
+      "Incident": 795644
+   },
+   {
+      "Year": 2011,
+      "Incident": 687023
+   },
+   {
+      "Year": 2012,
+      "Incident": 639559
+   },
+   {
+      "Year": 2013,
+      "Incident": 582465
+   },
+   {
+      "Year": 2014,
+      "Incident": 591495
+   }
+];
+
+// Create axes
+var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+categoryAxis.dataFields.category = "Year";
+categoryAxis.renderer.grid.template.location = 0;
+categoryAxis.renderer.minGridDistance = 30;
+categoryAxis.renderer.labels.template.horizontalCenter = "right";
+categoryAxis.renderer.labels.template.verticalCenter = "middle";
+categoryAxis.renderer.labels.template.rotation = -60;
+categoryAxis.tooltip.disabled = true;
+categoryAxis.renderer.minHeight = 110;
+categoryAxis.title.text = 'Year';
+
+var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+valueAxis.renderer.minWidth = 50;
+valueAxis.title.text = 'Incident count';
+
+// Create series
+var series = chart.series.push(new am4charts.ColumnSeries());
+series.sequencedInterpolation = true;
+series.dataFields.valueY = "Incident";
+series.dataFields.categoryX = "Year";
+series.tooltipText = "{categoryX}: [bold]{valueY}[/]";
+series.columns.template.strokeWidth = 0;
+
+series.tooltip.pointerOrientation = "vertical";
+
+series.columns.template.column.cornerRadiusTopLeft = 10;
+series.columns.template.column.cornerRadiusTopRight = 10;
+series.columns.template.column.fillOpacity = 0.8;
+
+// on hover, make corner radiuses bigger
+var hoverState = series.columns.template.column.states.create("hover");
+hoverState.properties.cornerRadiusTopLeft = 0;
+hoverState.properties.cornerRadiusTopRight = 0;
+hoverState.properties.fillOpacity = 1;
+
+series.columns.template.adapter.add("fill", function(fill, target) {
+  return chart.colors.getIndex(target.dataItem.index);
+});
+
+// Cursor
+chart.cursor = new am4charts.XYCursor();
+
+}); 
+</script>

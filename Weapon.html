@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>America Homicide Reports</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="Weapon.css" title="style" />
+  <script type="text/javascript"
+	        src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript"
+			src="Weapon.js"></script>
+  <!-- Resources -->
+	<script src="https://www.amcharts.com/lib/4/core.js"></script>
+	<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+	<script src="https://www.amcharts.com/lib/4/themes/kelly.js"></script>
+	<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+	<script src="https://www.amcharts.com/lib/4/plugins/wordCloud.js"></script>
+
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <h1><a href="index.html">U.S.A. Homicide Report<span class="logo_color"> </br></span></a></h1>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <li><a href="index.html">Overview</a></li>
+          <li><a href="Geographical.html">Geographical</a></li>
+          <li><a href="Human.html">Human</a></li>
+          <li class="selected"><a href="Weapon.html">Weapon</a></li>
+          <li><a href="Relationship.html">Relationship</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+      <div class="sidebar">
+        <h3>Designer</h3>
+        <h4>HungChun Lin</h4>
+		<h5>Data Science Program
+		</br>Columbian College of Arts and Sciences</br>George Washington University</h5>
+        <h5><a href="hungchun_lin@gwu.edu">hungchun_lin@gwu.edu</a></h5>
+        <p>This website is the project for visualizing the complex data<br /></p>
+        <h5>Instructor: Dr. Nima Zahadat</h5>
+		
+        <h3>Resourse Links</h3>
+        <ul>
+		  <li><a href="https://www.kaggle.com/">Kaggle Datasets</a></li>
+		  <li><a href="https://www.worldbank.org/">World Bank</a></li>
+		  <li><a href="https://www.amcharts.com/about/">amCharts</a></li>
+		  <li><a href="https://www.freeformatter.com/csv-to-json-converter.html#ad-output">FreeFormatter</a></li>
+          <li><a href="https://developers.google.com/chart/interactive/docs/gallery">Google Gallery</a></li>
+          <li><a href="https://www.data.gov/">Government Datasets</a></li>
+          <li><a href="https://www.plot.ly/">Plotly</a></li>
+        </ul>
+      </div>
+    <div id="content">
+        <h1>Weapon</h1>
+        <p>This page will analysis what kind of weapon is the most used for a homicide in the USA.
+		</p>
+		</br>
+	
+	<br /><br /><br />
+	
+	<!--D3-->
+	<div class="graph">
+	<div class="image_description">The weapon has been used for homicide in the USA</div>
+	<div id="weapon"
+			style="width:650px; height:450px;"></div>
+			
+	<p>From this world cloud, we can easily find that <span class='highlight_color_red'>handgun</span> is the most weapon has been used in homicide in the USA.</p>		
+	<br /><br /><br /><br /><br /><br />
+	
+			
+    </div><!--Google API-->
+	</div><!--content-->
+    </div><!--site_content-->
+    <h6>*Icons made by <a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" 
+	title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"  
+	title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></h6>
+
+    <div id="content_footer"></div>
+    <div id="footer">
+      Copyright &copy; <script>var d = new Date(); document.write(d.getFullYear());</script>
+    </div>
+  </div><!--main-->
+    
+</body>
+</html>
+
+
+<!-- Chart code -->
+<script>
+am4core.ready(function() {
+
+// Themes begin
+
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+var chart = am4core.create("weapon", am4plugins_wordCloud.WordCloud);
+var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
+
+series.accuracy = 4;
+series.step = 15;
+series.rotationThreshold = 0.6;
+series.maxCount = 200;
+series.minWordLength = 50;
+series.labels.template.margin(4,4,4,4);
+series.maxFontSize = am4core.percent(40);
+
+series.data = [
+   {
+      "Weapon": "Blunt Object",
+      "Incident": 1591719
+   },
+   {
+      "Weapon": "Drowning",
+      "Incident": 6012
+   },
+   {
+      "Weapon": "Drugs",
+      "Incident": 37076
+   },
+   {
+      "Weapon": "Explosives",
+      "Incident": 7150
+   },
+   {
+      "Weapon": "Fall",
+      "Incident": 1830
+   },
+   {
+      "Weapon": "Fire",
+      "Incident": 119624
+   },
+   {
+      "Weapon": "Firearm",
+      "Incident": 2172063
+   },
+   {
+      "Weapon": "Gun",
+      "Incident": 11544
+   },
+   {
+      "Weapon": "Handgun",
+      "Incident": 7105162
+   },
+   {
+      "Weapon": "Knife",
+      "Incident": 1910636
+   },
+   {
+      "Weapon": "Poison",
+      "Incident": 7224
+   },
+   {
+      "Weapon": "Rifle",
+      "Incident": 379276
+   },
+   {
+      "Weapon": "Shotgun",
+      "Incident": 364314
+   },
+   {
+      "Weapon": "Strangulation",
+      "Incident": 61706
+   },
+   {
+      "Weapon": "Suffocation",
+      "Incident": 23656
+   }
+];
+
+series.dataFields.word = "Weapon";
+series.dataFields.value = "Incident";
+
+series.labels.template.urlTarget = "_blank";
+series.labels.template.tooltipText = "{word}: {value}";
+
+series.colors = new am4core.ColorSet();
+series.colors.passOptions = {}; // makes it loop
+
+//series.labelsContainer.rotation = 45;
+series.fontWeight = "700"
+
+
+
+var hoverState = series.labels.template.states.create("hover");
+hoverState.properties.fill = am4core.color("#FF0000");
+
+}); // end am4core.ready()
+</script>
+
+<!-- HTML -->
+<div id="chartdiv"></div>
