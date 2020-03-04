@@ -1,6 +1,6 @@
 # Homicide Report in the USA
 
-Visit the website:
+Visit the website: https://hungchun-lin.github.io/HomicideReport/
 
 ## Introduction
 
